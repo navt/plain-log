@@ -3,11 +3,12 @@ error_reporting(E_ALL);
 ini_set('display_errors', "1");
 
 use Plain\Logger;
+use Psr\Log\LogLevel;
 
 require_once __DIR__."/../vendor/autoload.php";
 
-$file = Logger::factory("file", __DIR__."/data/file.log", true);
-// $file = Logger::factory("file", "", true);
+$file = Logger::factory("file", __DIR__."/data/file.log", LogLevel::WARNING);
+
 $a = 
 [
     'bool' => true,
@@ -19,7 +20,7 @@ $a =
     'object' => new \DateTime,
     'resource' => fopen('php://memory', 'r')
 ];
-$file->info("Это массив:", $a);
+$file->warning("This is array :", $a);
 
 $b = "Hello from file!";
-$file->debug("Это строка: $b");
+$file->debug("This is string: $b");

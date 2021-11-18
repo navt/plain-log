@@ -6,7 +6,7 @@ class Logger
 
     public function __construct() { }
 
-    public static function factory(string $mode, string $store, bool $active) {
+    public static function factory(string $mode, string $store, string $threshold) {
         $mode = ucfirst($mode);
         $class = sprintf("Plain\Options\%s", $mode);
         
@@ -18,7 +18,7 @@ class Logger
         }
  
         if (class_exists($class, false) === false) {
-            $object = new $class($store, $active);
+            $object = new $class($store, $threshold);
             return $object;
         }
 

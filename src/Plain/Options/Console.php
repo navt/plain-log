@@ -6,12 +6,12 @@ use DateTime;
 
 class Console extends AbstractLogger
 {
-    private $active = false;
+    private $threshold = "";
     private $stream = false;
     private $needClose = false;
 
-    public function __construct(string $store, bool $active) {
-        $this->active = $active;
+    public function __construct(string $store, string $threshold) {
+        $this->threshold = $threshold;
 
         if (defined('STDOUT')) {
             $this->stream = STDOUT;
@@ -19,10 +19,14 @@ class Console extends AbstractLogger
             $this->stream = fopen('php://output', 'a');
             $this->needClose = true;
         }
+
+        if ($this->needClose === true) {
+            register_shutdown_function([$this, "close"]);
+        }
     }
 
     public function log($level, $message, array $context = []) {
-        if ($this->active === false) return;
+        if (Common::$logLevels[$level] < Common::$logLevels[$this->threshold]) return;
 
         if (is_string($message) === false) {
             $s = var_export($message, true);
@@ -30,9 +34,8 @@ class Console extends AbstractLogger
         }
 
         $date = new DateTime();
-        $outFormat = "[%s] [%s] %s".PHP_EOL."%s";
-        $out = sprintf($outFormat,
-            $date->format('Y-m-d H:i:s.v'), 
+        $out = sprintf(Common::$outFormat,
+            $date->format(Common::$dateFormat), 
             ucfirst($level),
             $message,
             $this->displayContext($context));

@@ -6,7 +6,7 @@ use DateTime;
 
 class File extends AbstractLogger
 {
-    private $active = false;
+    private $threshold = "";
     private $logPath = "app.log";
     private $pointer = false;
     private $needClose = false;
@@ -14,15 +14,19 @@ class File extends AbstractLogger
     private $fileMode = 0644;
     private $dirMode = 0775;
 
-    public function __construct(string $store, bool $active) {
-        $this->active = $active;
+    public function __construct(string $store, string $threshold) {
+        $this->threshold = $threshold;
 
         if ($store != "") {
             $this->logPath = $store;
         }
         
         if (is_dir(dirname($this->logPath)) === false) {
-            $this->mkPath($this->logPath, $this->dirMode);
+            $flag = $this->mkPath($this->logPath, $this->dirMode);
+        }
+
+        if ($flag === false) {
+            syslog(LOG_WARNING, "No directory created for the log file $this->logPath");
         }
 
         $this->open();
@@ -72,7 +76,7 @@ class File extends AbstractLogger
     }
 
     public function log($level, $message, array $context = []) {
-        if ($this->active === false) return;
+        if (Common::$logLevels[$level] < Common::$logLevels[$this->threshold]) return;
         if ($this->needClose !== true) return;
 
         if (is_string($message) === false) {
@@ -81,9 +85,8 @@ class File extends AbstractLogger
         }
 
         $date = new DateTime();
-        $outFormat = "[%s] [%s] %s".PHP_EOL."%s";
-        $out = sprintf($outFormat,
-            $date->format('Y-m-d H:i:s.v'), 
+        $out = sprintf(Common::$outFormat,
+            $date->format(Common::$dateFormat), 
             ucfirst($level),
             $message,
             $this->displayContext($context));
