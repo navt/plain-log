@@ -26,7 +26,12 @@ class File extends AbstractLogger
         }
 
         if ($flag === false) {
-            syslog(LOG_WARNING, "No directory created for the log file $this->logPath");
+            $date = new DateTime();
+            $ct = $date->format(Common::$dateFormat);
+            syslog(LOG_WARNING, 
+                sprintf("%s No directory created for the log file %s",
+                $ct, $this->logPath)
+            );
         }
 
         $this->open();
