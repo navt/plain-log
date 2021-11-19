@@ -1,7 +1,7 @@
 # Plain-log
 Простая в использовании библиотека ведения журнала для PHP, совместимая с [PSR-3](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md). Минималистичная, легко расширяемая, предназначена для быстрого включения в прект. Много идей и фрагментов кода взято из библиотеки [pear/Log](https://github.com/pear/Log).
 ## Установка
-Включите в свой composer.json следующие элементы
+Включите в свой `composer.json` следующие элементы
 ```json
 {
     "repositories": [
@@ -28,7 +28,7 @@ use Psr\Log\LogLevel;
 
 require_once "/vendor/autoload.php";
 
-// создаете экземпляр логгера для вывода в консоль
+// создаете экземпляр логгера для вывода в консоль с помощью фабрики
 $console = Logger::factory("console", "", LogLevel::WARNING);
 $a = 
 [
@@ -71,6 +71,8 @@ array (
   'resource' => NULL,
 )
 ```
+Примеры использования смотрите в `/examples/`.
+
 ## Установка порогового значения уровня логгирования
-Plain-log реализует Psr\Log\LoggerInterface, поэтому вы можете использовать константы [Psr\Log\LogLevel](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md#5-psrlogloglevel) для установки порогового уровня логгирования, чтобы не регистрировать сообщения ниже этого уровня.
-Уровень по умолчанию - DEBUG, это означает, что все сообщения будут регистрироваться.
+Plain-log реализует Psr\Log\LoggerInterface, поэтому вы можете использовать константы [Psr\Log\LogLevel](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md#5-psrlogloglevel) для установки порогового уровня логгирования, чтобы не регистрировать сообщения ниже этого уровня. В приведённом выше примере выставлен порог `LogLevel::WARNING`.
+Уровень по умолчанию - `DEBUG` и в этом случае все сообщения будут регистрироваться.
