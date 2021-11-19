@@ -21,11 +21,13 @@ class File extends AbstractLogger
             $this->logPath = $store;
         }
         
-        if (is_dir(dirname($this->logPath)) === false) {
-            $flag = $this->mkPath($this->logPath, $this->dirMode);
+        if (is_dir(dirname($this->logPath)) === true) {
+            $isDir = true;
+        } else {
+            $isDir = $this->mkPath($this->logPath, $this->dirMode);
         }
 
-        if ($flag === false) {
+        if ($isDir === false) {
             $date = new DateTime();
             $ct = $date->format(Common::$dateFormat);
             syslog(LOG_WARNING, 
