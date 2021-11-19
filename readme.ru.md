@@ -71,7 +71,7 @@ array (
   'resource' => NULL,
 )
 ```
-Примеры использования смотрите в `/examples/`.
+Примеры использования смотрите в [`/examples/`](https://github.com/navt/plain-log/tree/master/examples).
 
 ## Установка порогового значения уровня логгирования
 Plain-log реализует Psr\Log\LoggerInterface, поэтому вы можете использовать константы [Psr\Log\LogLevel](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md#5-psrlogloglevel) для установки порогового уровня логгирования, чтобы не регистрировать сообщения ниже этого уровня. В приведённом выше примере выставлен порог `LogLevel::WARNING`.

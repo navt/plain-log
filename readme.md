@@ -71,7 +71,7 @@ array (
   'resource' => NULL,
 )
 ```
-See examples of use in `/examples/`.
+See examples of use in [`/examples/`](https://github.com/navt/plain-log/tree/master/examples).
 
 ## Setting the threshold value of the logging level
 Plain-log implements Psr\Log\LoggerInterface, so you can use the  [Psr\Log\LogLevel](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md#5-psrlogloglevel) constants to set the logging threshold to not log messages below this level. In the above example, the threshold is `LogLevel::WARNING`. 
