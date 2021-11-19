@@ -5,14 +5,15 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "navt",
+            "name": "Boris Fedorov",
             "email": "w-navt@yandex.ru"
         }
     ],
     "require": {
+        "php": ">=5.6.0",
         "psr/log": "^1.1"
     },
     "autoload": {
-        "psr-4": { "": "src/" }
+        "psr-4": { "Plain\\": "src/Plain/" }
     }
 }
