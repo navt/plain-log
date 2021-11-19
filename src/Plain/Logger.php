@@ -1,12 +1,18 @@
 <?php
 namespace Plain;
 
+use Psr\Log\LogLevel;
+
 class Logger 
 {
 
     public function __construct() { }
 
-    public static function factory(string $mode, string $store, string $threshold) {
+    public static function factory(
+        string $mode, 
+        string $store, 
+        string $threshold = LogLevel::DEBUG) {
+        
         $mode = ucfirst($mode);
         $class = sprintf("Plain\Options\%s", $mode);
         

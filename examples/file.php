@@ -20,7 +20,7 @@ $a =
     'object' => new \DateTime,
     'resource' => fopen('php://memory', 'r')
 ];
-$file->warning("This is array :", $a);
+$file->warning("This is cazy array :", $a);
 
 $b = "Hello from file!";
 $file->debug("This is string: $b");
