@@ -5,6 +5,7 @@ use Psr\Log\LogLevel;
 
 class Logger 
 {
+    private static $instances = [];
 
     public function __construct() { }
 
@@ -29,6 +30,20 @@ class Logger
         }
 
         return null;
+    }
+
+    public static function singleton(
+        string $mode, 
+        string $store, 
+        string $threshold = LogLevel::DEBUG) {
+
+        $sign = serialize([$mode, $store, $threshold]);
+        
+        if (!isset(self::$instances[$sign])) {
+            self::$instances[$sign] = Logger::factory($mode, $store, $threshold);
+        }
+
+        return self::$instances[$sign];
     }
     
 }
