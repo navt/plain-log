@@ -7,8 +7,7 @@ use Psr\Log\LogLevel;
 
 require_once __DIR__."/../vendor/autoload.php";
 
-$file = Logger::factory("file", __DIR__."/data/file.log", LogLevel::WARNING);
-
+$file = Logger::singleton("file", __DIR__."/data/file.log", LogLevel::WARNING);
 $a = 
 [
     'bool' => true,

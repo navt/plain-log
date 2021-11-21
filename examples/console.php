@@ -7,7 +7,7 @@ use Psr\Log\LogLevel;
 
 require_once __DIR__."/../vendor/autoload.php";
 
-$console = Logger::factory("console", "", LogLevel::WARNING);
+$console = Logger::singleton("console", "", LogLevel::WARNING);
 $a = 
 [   
     'bool' => true,

@@ -28,8 +28,10 @@ use Psr\Log\LogLevel;
 
 require_once "/vendor/autoload.php";
 
-// создаете экземпляр логгера для вывода в консоль с помощью фабрики
-$console = Logger::factory("console", "", LogLevel::WARNING);
+// создаете экземпляр логгера для вывода в консоль с помощью singleton 
+// или factory
+$console = Logger::singleton("console", "", LogLevel::WARNING);
+// $console = Logger::factory("console", "", LogLevel::WARNING);
 $a = 
 [
     'bool' => true,

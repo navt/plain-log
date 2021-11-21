@@ -28,8 +28,9 @@ use Psr\Log\LogLevel;
 
 require_once "/vendor/autoload.php";
 
-// create a logger instance for console output using a factory
-$console = Logger::factory("console", "", LogLevel::WARNING);
+// create a logger instance for console output using a singleton or factory
+$console = Logger::singleton("console", "", LogLevel::WARNING);
+// $console = Logger::factory("console", "", LogLevel::WARNING);
 $a = 
 [
     'bool' => true,
