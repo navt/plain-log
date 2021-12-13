@@ -50,6 +50,14 @@ class Browser extends AbstractLogger
     }
 
     private function displayContext(array $context=[]) {
-        return ($context == []) ? "" : addslashes(var_export($context, true)).PHP_EOL;
+        if ($context == []) return "";
+        
+        $dump = print_r($context, true);
+        
+        if(strpos($dump, "*RECURSION*") !== false) {
+            return addslashes($dump).PHP_EOL;
+        }
+
+        return addslashes(var_export($context, true)).PHP_EOL;
     }
 }

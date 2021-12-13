@@ -43,7 +43,15 @@ class Console extends AbstractLogger
     }
 
     private function displayContext(array $context=[]) {
-        return ($context == []) ? "" : var_export($context, true).PHP_EOL;
+        if ($context == []) return "";
+        
+        $dump = print_r($context, true);
+        
+        if(strpos($dump, "*RECURSION*") !== false) {
+            return $dump.PHP_EOL;
+        }
+
+        return var_export($context, true).PHP_EOL;
     }
 
     public function close() {

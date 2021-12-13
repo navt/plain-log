@@ -19,5 +19,8 @@ $a =
     'object' => new \DateTime,
     'resource' => fopen('php://memory', 'r')
 ];
-$console->debug("This array from debug:", $a);
-$console->error("This array from error:", $a);
+$console->debug("This array from debug level:", $a);
+$console->error("This array from error level:", $a);
+
+$a['recursive'] = &$a;
+$console->error("This array has recursion:", $a);
