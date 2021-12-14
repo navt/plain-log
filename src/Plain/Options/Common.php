@@ -18,4 +18,5 @@ class Common
 
     public static $dateFormat = 'Y-m-d H:i:s.v';
     public static $outFormat  = "[%s] [%s] %s".PHP_EOL."%s";
+    public static $recursion  = "*RECURSION*";
 }

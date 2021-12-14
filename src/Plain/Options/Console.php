@@ -47,7 +47,7 @@ class Console extends AbstractLogger
         
         $dump = print_r($context, true);
         
-        if(strpos($dump, "*RECURSION*") !== false) {
+        if(strpos($dump, Common::$recursion) !== false) {
             return $dump.PHP_EOL;
         }
 

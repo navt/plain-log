@@ -54,7 +54,7 @@ class Browser extends AbstractLogger
         
         $dump = print_r($context, true);
         
-        if(strpos($dump, "*RECURSION*") !== false) {
+        if(strpos($dump, Common::$recursion) !== false) {
             return addslashes($dump).PHP_EOL;
         }
 
