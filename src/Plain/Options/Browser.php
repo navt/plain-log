@@ -8,6 +8,7 @@ use DateTime;
 class Browser extends AbstractLogger
 {
     private $threshold = "";
+    private $store; 
     private $methods = [
         LogLevel::EMERGENCY => "error",
         LogLevel::ALERT     => "error",
@@ -27,12 +28,13 @@ class Browser extends AbstractLogger
 
     public function __construct(string $store, string $threshold) {
         $this->threshold = $threshold;
+        $this->store = $store;
     }
 
     public function log($level, $message, array $context = []) {
         if (Common::$logLevels[$level] < Common::$logLevels[$this->threshold]) return;
 
-        if (is_string($message) === false) {
+        if (!is_string($message)) {
             $s = var_export($message, true);
             $message = sprintf("Incorrect message: %s", $s);
         }

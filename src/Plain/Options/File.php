@@ -86,7 +86,7 @@ class File extends AbstractLogger
         if (Common::$logLevels[$level] < Common::$logLevels[$this->threshold]) return;
         if ($this->needClose !== true) return;
 
-        if (is_string($message) === false) {
+        if (!is_string($message)) {
             $s = var_export($message, true);
             $message = sprintf("Incorrect message: %s", $s);
         }
